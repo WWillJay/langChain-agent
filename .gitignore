@@ -1,0 +1,18 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+venv/
+env/
+.venv/
+.env/
+
+# IDEA
+.idea/
+*.iml
+
+# 日志、配置
+*.log
+.DS_Store
