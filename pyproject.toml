@@ -1,0 +1,67 @@
+[project]
+# 项目基本信息
+name = "first-agent"          # 项目名称（小写，无空格）
+version = "0.0.1"                  # 版本号（遵循语义化版本）
+authors = [
+    { name = "WillJay", email = "x@qq.com" }
+]
+description = "学习langChain"  # 项目描述
+readme = "README.md"               # 关联 README 文件
+requires-python = ">=3.10,<3.15"    # 支持的 Python 版本（适配 LangChain）
+license = { file = "LICENSE" }     # 许可证文件（可选）
+keywords = ["langchain", "openai", "llm", "json-parser"]  # 项目关键词
+
+# 项目核心依赖（运行时需要）
+dependencies = [
+    "langchain-openai>=0.1.0",     # LangChain OpenAI 集成
+    "python-dotenv>=1.0.1",        # 环境变量管理
+    "openai>=1.0.0",               # OpenAI Python SDK（langchain-openai 依赖）
+    "pydantic>=2.0.0",             # 数据验证（LangChain 核心依赖）
+    "langgraph>=1.0.0"
+
+]
+
+# 可选依赖组（开发/测试用）
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.6.1",              # 导入排序
+    "mypy>=1.11.1"                  # 类型检查
+]
+
+# 构建系统配置（使用 hatchling 作为构建后端）
+[build-system]
+requires = ["setuptools>=73.0.0"]
+build-backend = "setuptools.build_meta"
+
+# 核心配置：映射工具名到代码入口
+[project.scripts]
+agent_email = "agent.agents:agent_email"
+
+agent_web = "agent.agents:agent_web"
+
+agent_all = "agent.agents:agent_all"
+
+# 工具配置（可选，用于代码格式化、测试等）
+[tool.setuptools]
+packages = ["agent"]          # 你的包名（src下的agent文件夹）
+package-dir = { "" = "src" }
+#[tool.setuptools.package-dir]
+#"langgraph.templates.agent"="src/agent"
+#"agent" = "src/agent"
+
+[tool.black]
+line-length = 120
+target-version = ["py39", "py310", "py311"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | __pycache__
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
